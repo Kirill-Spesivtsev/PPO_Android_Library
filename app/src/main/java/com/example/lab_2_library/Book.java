@@ -2,7 +2,7 @@ package com.example.lab_2_library;
 
 public class Book {
 
-    private int id;
+    int id;
     String title;
     String author;
     int year;
@@ -18,4 +18,6 @@ public class Book {
         this.publisher = publisher;
         this.pageCount = pageCount;
     }
+
+    public Book(){}
 }

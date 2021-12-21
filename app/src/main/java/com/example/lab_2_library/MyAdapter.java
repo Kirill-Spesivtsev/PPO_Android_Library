@@ -20,7 +20,7 @@ public class MyAdapter extends BaseAdapter {
     MyAdapter(Context con, ArrayList<Book> obj) {
         context = con;
         objects = obj;
-        inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -48,12 +48,6 @@ public class MyAdapter extends BaseAdapter {
 
         Book item = (Book) getItem(position);
 
-        if (view == null)
-        {
-            Log.d("DEBUG", "IDKwhatsHappeningHere");
-
-            return view;
-        }
         ((TextView) view.findViewById(R.id.textViewTitle)).setText(item.title);//set to fragment
         ((TextView) view.findViewById(R.id.textViewAuthor)).setText(item.author);
 
