@@ -63,4 +63,8 @@ public class MyAdapter extends BaseAdapter {
             return  false;
         }
     }
+
+    public void Clear(){
+        objects.clear();
+    }
 }

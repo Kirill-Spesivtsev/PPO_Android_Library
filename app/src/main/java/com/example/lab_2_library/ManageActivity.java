@@ -44,14 +44,20 @@ public class ManageActivity extends AppCompatActivity {
         db = databaseHelper.getWritableDatabase();
 
         Bundle extras = getIntent().getExtras();
+        TextView tv = findViewById(R.id.textView_action);
 
         if (extras != null) {
             operation = extras.getString("operation");
             if (operation.equals("edit")){
                 adapterItemId = extras.getInt("adapterItemId");
+                tv.setText("Редактировать книгу");
                 FillTextFields();
             }
+            else {
+                tv.setText("Создать книгу");
+            }
         }
+
     }
 
     @Override
@@ -91,12 +97,12 @@ public class ManageActivity extends AppCompatActivity {
 
         long res = db.insert(DatabaseHelper.TABLE, null, cv);
         if (res != -1){
-            Toast.makeText(this,"Book Created...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Книга Создана...", Toast.LENGTH_SHORT).show();
             MainActivity.myAdapter.notifyDataSetChanged();
             CloseActivity();
         }
         else{
-            Toast.makeText(this,"Something went wrong. Please try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Что-то пошло не так... Повторите попытку", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -116,12 +122,12 @@ public class ManageActivity extends AppCompatActivity {
 
         int res = db.update(DatabaseHelper.TABLE, cv, DatabaseHelper.COLUMN_ID + " = " + dbItemId, null);
         if (res != 0){
-            Toast.makeText(this,"Book Edited...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Книга Изменена...", Toast.LENGTH_SHORT).show();
             MainActivity.myAdapter.notifyDataSetChanged();
             CloseActivity();
         }
         else{
-            Toast.makeText(this,"Something went wrong. Please try again", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Что-то пошло не так... Повторите попытку", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -145,14 +151,6 @@ public class ManageActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-
-        TextView tv = findViewById(R.id.textView_action);
-        if (this.operation == "edit"){
-            tv.setText("Edit Book");
-        }
-        else{
-            tv.setText("Add new Book");
-        }
 
     }
 }

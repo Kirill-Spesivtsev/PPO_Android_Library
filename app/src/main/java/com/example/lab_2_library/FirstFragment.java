@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,8 +28,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class FirstFragment extends Fragment {
@@ -65,10 +68,25 @@ public class FirstFragment extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                FrameLayout fl = getView().findViewById(R.id.frame_detailed);
+                LinearLayout fl = getView().findViewById(R.id.frame_detailed);
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) fl.getLayoutParams();
                 params.weight = 4f;
+
+
+                Book curBook = (Book) myAdapter.getItem(position);
+                TextView tvTitle = getView().findViewById(R.id.textViewTitle);
+                TextView tvAuthor = getView().findViewById(R.id.textViewAuthor);
+                TextView tvPages = getView().findViewById(R.id.textViewPagecount);
+                TextView tvPublisher = getView().findViewById(R.id.textViewPublisher);
+                TextView tvYear = getView().findViewById(R.id.textViewPublicationYear);
+                tvTitle.setText(curBook.title);
+                tvAuthor.setText(curBook.author);
+                tvPages.setText("Страниц: " + Integer.toString(curBook.pageCount));
+                tvPublisher.setText("Издатель: " + curBook.publisher);
+                tvYear.setText("Год издания: " + Integer.toString(curBook.year));
+
                 fl.setLayoutParams(params);
+
             }
         });
 
@@ -76,7 +94,7 @@ public class FirstFragment extends Fragment {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FrameLayout fl = getView().findViewById(R.id.frame_detailed);
+                LinearLayout fl = getView().findViewById(R.id.frame_detailed);
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) fl.getLayoutParams();
                 params.weight = 0f;
                 fl.setLayoutParams(params);
@@ -129,11 +147,8 @@ public class FirstFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-            myAdapter.notifyDataSetChanged();
-            //new Handler().postDelayed(() -> refreshAdapter(), 1000);
+        refreshBooksList();
     }
-
-    public void refreshAdapter(){}
 
     private void fillListData() {
         for (int i = 1; i < 20; i++){
@@ -149,18 +164,23 @@ public class FirstFragment extends Fragment {
         if (success){
             myAdapter.notifyDataSetChanged();
             db.delete(DatabaseHelper.TABLE, "id = " + bookId, null);
-            Toast.makeText(getActivity(),"Book Deleted...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Книга Удалена...", Toast.LENGTH_SHORT).show();
         }
         else{
-            Toast.makeText(getActivity(),"Something went wrong...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Что-то пошло не так... Повторите попытку", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public void refreshBooksList(){
+        pullData();
+        myAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        myAdapter.notifyDataSetChanged();
+        pullData();
     }
 
     @Override
@@ -174,9 +194,10 @@ public class FirstFragment extends Fragment {
         Cursor cursor = db.rawQuery(query, null);
 
         if (cursor.getCount() == 0){
-            Toast.makeText(getActivity(),"No data...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"Пусто...", Toast.LENGTH_SHORT).show();
         }
         else{
+            ArrayList<Book> bookList = new ArrayList<>();
             while (cursor.moveToNext()) {
                 Book newBook = new Book();
                 newBook.id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_ID));
@@ -185,8 +206,11 @@ public class FirstFragment extends Fragment {
                 newBook.publisher = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PUBLISHER));
                 newBook.year = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_YEAR));
                 newBook.pageCount = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_PAGECOUNT));
-                books.add(newBook);
+                bookList.add(newBook);
             }
+            bookList.sort(Comparator.comparing(o -> o.title));
+            books.clear();
+            books.addAll(bookList);
         }
         cursor.close();
     }

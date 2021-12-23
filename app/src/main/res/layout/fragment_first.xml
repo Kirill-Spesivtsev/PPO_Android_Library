@@ -14,35 +14,130 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical">
-        <FrameLayout
-            android:layout_weight="4"
+
+        <LinearLayout
+            android:layout_weight="0"
             android:id="@+id/frame_detailed"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/listViewBooks">
+            app:layout_constraintBottom_toTopOf="@id/listViewBooks"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"/>
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/default_book"
+                    android:layout_gravity="start|center_vertical">
+                </ImageView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_weight="1"
+                        android:textColor="@color/colorTextMain"
+                        android:textSize="@dimen/text_huge"
+                        android:id="@+id/textViewTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_textView"
+                        android:text="Title: "/>
+                    <TextView
+                        android:layout_weight="1"
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="@dimen/text_primary"
+                        android:id="@+id/textViewAuthor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_textView"
+                        android:text="Author: "/>
+                </LinearLayout>
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/hide_frame_detailed_button"
-                style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                app:icon="@android:drawable/arrow_down_float"
-                app:iconPadding="10dp"
-                android:text="Hide"
-                android:textColor="@color/mainBackground"/>
-        </FrameLayout>
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_weight="1"
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="@dimen/text_primary"
+                        android:id="@+id/textViewPublicationYear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_textView"
+                        android:text="Year: "/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="@dimen/text_primary"
+                        android:id="@+id/textViewPagecount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_textView"
+                        android:text="Pages: "/>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewPublisher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginStart="@dimen/margin_textView"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="@dimen/margin_textView"
+
+                        android:text="Publisher: "
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="@dimen/text_primary" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/hide_frame_detailed_button"
+                        style="@style/Widget.AppCompat.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="Скрыть"
+                        android:textColor="@color/mainBackground"
+                        app:icon="@android:drawable/arrow_down_float"
+                        app:iconPadding="10dp" />
+
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
         <ListView
             android:id="@+id/listViewBooks"
             android:layout_width="match_parent"
