@@ -24,10 +24,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    MyAdapter myAdapter;
-    ArrayList<Book> books = new ArrayList<>();
-    DatabaseHelper databaseHelper;
-    SQLiteDatabase db;
+    static MyAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,47 +32,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        ListView listViewBooks = findViewById(R.id.listViewBooks);
-        databaseHelper = new DatabaseHelper(getApplicationContext());
-        db = databaseHelper.getWritableDatabase();
-        //databaseHelper.onCreate(db);
-        //fillListData();
-        pullData();
-
-        myAdapter = new MyAdapter(this, books);
-        listViewBooks.setAdapter(myAdapter);
     }
 
-    private void fillListData() {
-        for (int i = 1; i < 20; i++){
-            books.add(new Book(books.size(), "Title " + i,
-                    "Author " + i, 0, "", 0 ));
-        }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 
-    public void pullData(){
-        String query = "SELECT " + "* " + "FROM " + DatabaseHelper.TABLE;
-        Cursor cursor = db.rawQuery(query, null);
-
-        if (cursor.getCount() == 0){
-            Toast.makeText(MainActivity.this,"No data...", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            while (cursor.moveToNext()) {
-                Book newBook = new Book();
-                newBook.id = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_ID));
-                newBook.title = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TITLE));
-                newBook.author = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_AUTHOR));
-                newBook.publisher = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_PUBLISHER));
-                newBook.year = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_YEAR));
-                newBook.pageCount = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_PAGECOUNT));
-                books.add(newBook);
-            }
-        }
-        cursor.close();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

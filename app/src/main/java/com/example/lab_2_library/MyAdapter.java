@@ -29,28 +29,38 @@ public class MyAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
-        return objects.get(position);
+    public Object getItem(int index) {
+        return objects.get(index);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public long getItemId(int index) {
+        return index;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int index, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null)
         {
             view = inflater.inflate(R.layout.list_item, parent, false);
         }
 
-        Book item = (Book) getItem(position);
+        Book item = (Book) getItem(index);
 
         ((TextView) view.findViewById(R.id.textViewTitle)).setText(item.title);//set to fragment
         ((TextView) view.findViewById(R.id.textViewAuthor)).setText(item.author);
 
         return view;
+    }
+
+    public boolean deleteItem(int index){
+        try
+        {
+            objects.remove(index);
+            return true;
+        }catch (IndexOutOfBoundsException e){
+            return  false;
+        }
     }
 }

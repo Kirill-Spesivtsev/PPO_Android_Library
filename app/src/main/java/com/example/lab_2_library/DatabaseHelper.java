@@ -30,12 +30,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_YEAR + " INTEGER, "
                 + COLUMN_PUBLISHER + " TEXT, "
                 + COLUMN_PAGECOUNT + " INTEGER);");
-
-        //db.execSQL("INSERT INTO "+ TABLE +" (" + COLUMN_TITLE+ ", " + COLUMN_YEAR  + ") VALUES ('Том Смит', 1981);");
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion,  int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE);
+        db.execSQL("DROP TABLE IF EXISTS "+ TABLE);
         onCreate(db);
     }
 
