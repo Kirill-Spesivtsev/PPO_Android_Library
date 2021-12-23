@@ -140,24 +140,26 @@
             android:layout_margin="10dp"
             android:layout_weight="10">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_save"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:textSize="25sp"
                 android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:layout_gravity="start|bottom"
                 android:layout_margin="20dp"
+                android:background="@color/colorAccent"
                 android:text="Save" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_back"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:textSize="25sp"
                 android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_height="60dp"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="20dp"
+                android:background="@color/colorAccent"
                 android:text="Back" />
         </FrameLayout>
 

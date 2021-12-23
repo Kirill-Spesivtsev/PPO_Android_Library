@@ -1,5 +1,6 @@
 package com.example.lab_2_library;
 
+import android.app.LauncherActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -57,6 +61,27 @@ public class FirstFragment extends Fragment {
             }
         });
 
+        ListView lv = getView().findViewById(R.id.listViewBooks);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                FrameLayout fl = getView().findViewById(R.id.frame_detailed);
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) fl.getLayoutParams();
+                params.weight = 4f;
+                fl.setLayoutParams(params);
+            }
+        });
+
+        Button b = getView().findViewById(R.id.hide_frame_detailed_button);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FrameLayout fl = getView().findViewById(R.id.frame_detailed);
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) fl.getLayoutParams();
+                params.weight = 0f;
+                fl.setLayoutParams(params);
+            }
+        });
 
         registerForContextMenu(getView().findViewById(R.id.listViewBooks));
 

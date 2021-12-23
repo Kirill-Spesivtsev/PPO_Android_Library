@@ -6,19 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".FirstFragment">
 
-    <ListView
-        android:id="@+id/listViewBooks"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.445">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_weight="4"
+            android:id="@+id/frame_detailed"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/listViewBooks">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Title"/>
 
 
-    </ListView>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/hide_frame_detailed_button"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                app:icon="@android:drawable/arrow_down_float"
+                app:iconPadding="10dp"
+                android:text="Hide"
+                android:textColor="@color/mainBackground"/>
+        </FrameLayout>
+        <ListView
+            android:id="@+id/listViewBooks"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frame_detailed"
+            app:layout_constraintVertical_bias="0.445">
+        </ListView>
+    </LinearLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/create_book_button"
