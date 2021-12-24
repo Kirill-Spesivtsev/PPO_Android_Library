@@ -25,6 +25,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -72,7 +74,6 @@ public class FirstFragment extends Fragment {
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) fl.getLayoutParams();
                 params.weight = 4f;
 
-
                 Book curBook = (Book) myAdapter.getItem(position);
                 TextView tvTitle = getView().findViewById(R.id.textViewTitle);
                 TextView tvAuthor = getView().findViewById(R.id.textViewAuthor);
@@ -100,6 +101,7 @@ public class FirstFragment extends Fragment {
                 fl.setLayoutParams(params);
             }
         });
+
 
         registerForContextMenu(getView().findViewById(R.id.listViewBooks));
 
@@ -150,6 +152,8 @@ public class FirstFragment extends Fragment {
         refreshBooksList();
     }
 
+
+
     private void fillListData() {
         for (int i = 1; i < 20; i++){
             books.add(new Book(books.size(), "Title " + i,
@@ -190,7 +194,7 @@ public class FirstFragment extends Fragment {
     }
 
     public void pullData(){
-        String query = "SELECT " + "* " + "FROM " + DatabaseHelper.TABLE;
+        String query = "SELECT " + "* " + "FROM " + DatabaseHelper.TABLE + " " + ((MainActivity)getActivity()).filterQuery;
         Cursor cursor = db.rawQuery(query, null);
 
         if (cursor.getCount() == 0){

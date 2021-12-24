@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context=".SecondFragment"
@@ -18,14 +19,15 @@
             android:layout_weight="2">
 
             <TextView
-                android:id="@+id/textView_action"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text=" "
+                android:text="Добавить фильтр"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+
         </FrameLayout>
 
         <LinearLayout
@@ -36,100 +38,20 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputTitle"
+                android:id="@+id/textInputMinimalYear"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:inputType="number">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Title"
+                    android:hint="Минимальный год издания"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputAuthor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Author"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputPagecount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Pages"
-                    android:inputType="number"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputPublisher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Publisher"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputYear"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Publication Year"
-                    android:inputType="number"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -138,13 +60,29 @@
             android:layout_margin="10dp"
             android:layout_weight="10">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_save"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:textSize="22sp"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="start|bottom"
+                android:layout_margin="20dp"
+                android:paddingHorizontal="8dp"
+                android:background="@color/colorAccent"
+                android:text="Сохранить" />
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_back"
                 style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:textSize="22sp"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
                 android:layout_gravity="end|bottom"
-                android:text="Back" />
+                android:layout_margin="20dp"
+                android:paddingHorizontal="8dp"
+                android:background="@color/colorAccent"
+                android:text="Назад" />
         </FrameLayout>
 
     </LinearLayout>
